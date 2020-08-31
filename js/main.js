@@ -5,8 +5,52 @@ let _camera, _scene, _renderer;
 let modelLoaderGLTF;
 let particle;
 
+let deer = {
+    model: {},
+    states: [
+        {
+            position: {
+                x: -0.45,
+                y: -7.35,
+                z: -3
+            },
+            rotation: {
+                x: 0,
+                y: -0.66,
+                z: -0.09
+            },
+        },
+        {
+            position: {
+                x: -5,
+                y: -9.79,
+                z: 3.34
+            },
+            rotation: {
+                x: 0,
+                y: -0.66,
+                z: -0.09
+            },
+        },
+        {
+            position: {
+                x: 1.14,
+                y: -9.79,
+                z: 3.34
+            },
+            rotation: {
+                x: 0,
+                y: -2.14,
+                z: 0.21
+            },
+        }
+    ]
+};
+
+
 let sceneWrapperId = 'background'
 let sceneWrapperNode;
+
 Init()
 Animate()
 
@@ -43,6 +87,8 @@ function Animate()
     particle.rotation.x += 0.0000;
     particle.rotation.y -= 0.0005;
 
+    TWEEN.update();
+
     _renderer.render(_scene, _camera);
 }
 
@@ -51,7 +97,7 @@ function LoadModels()
     modelLoaderGLTF.setPath('../models/');
     modelLoaderGLTF.load('deer.glb', 
         function (gltf) {
-            let model = gltf.scene;
+            deer.model = gltf.scene;
             _scene.add( gltf.scene );
 
             gltf.animations; // Array<THREE.AnimationClip>
@@ -60,19 +106,20 @@ function LoadModels()
             gltf.cameras; // Array<THREE.Camera>
             gltf.asset; // Object
 
-            model.traverse((o) => {
+            deer.model.traverse((o) => {
                 if (o.isMesh) o.material = new THREE.MeshNormalMaterial();
             });
 
-            model.position.x = -0.45;
-            model.position.y = -7.35;
-            model.position.z = -3;
+            deer.model.position.x = deer.states[0].position.x;
+            deer.model.position.y = deer.states[0].position.y;
+            deer.model.position.z = deer.states[0].position.z;
 
-            model.rotation.x = 0;
-            model.rotation.y = -0.66;
-            model.rotation.z = -0.09;
+            deer.model.rotation.x = deer.states[0].rotation.x;
+            deer.model.rotation.y = deer.states[0].rotation.y;
+            deer.model.rotation.z = deer.states[0].rotation.z;
         }
     )
+    
 }
 
 function OnWindowResize()
@@ -127,9 +174,49 @@ function SetLight()
     _scene.add( lights[2] );
 }
 
-document.querySelectorAll('.btn-scrolldown')[0].addEventListener('click', function() {
-    var qm = new THREE.Quaternion();
-    THREE.Quaternion.slerp(_camera.quaternion, destRotation, qm, 0.07);
-    _camera.quaternion = qm;
-    _camera.quaternion.normalize();
+function ModelTransition(model, position)
+{
+    let tween = new TWEEN.Tween(model.position).to(position, 500);
+
+    tween.start();
+
+    tween.onUpdate(function() {
+        model.position.x = this.x;
+        model.position.y = this.y;
+        model.position.z = this.z;
+    });
+}
+
+function ModelChangeState(model, states, progress)
+{
+    let stateIndex = parseInt(progress);
+
+    if (stateIndex >= states.length - 1)
+    {
+        return;
+    }
+
+    progress = progress % 1;
+
+    model.position.x = states[stateIndex].position.x + (states[stateIndex + 1].position.x - states[stateIndex].position.x) * progress;
+    model.position.y = states[stateIndex].position.y + (states[stateIndex + 1].position.y - states[stateIndex].position.y) * progress;
+    model.position.z = states[stateIndex].position.z + (states[stateIndex + 1].position.z - states[stateIndex].position.z) * progress;
+
+    model.rotation.x = states[stateIndex].rotation.x + (states[stateIndex + 1].rotation.x - states[stateIndex].rotation.x) * progress;
+    model.rotation.y = states[stateIndex].rotation.y + (states[stateIndex + 1].rotation.y - states[stateIndex].rotation.y) * progress;
+    model.rotation.z = states[stateIndex].rotation.z + (states[stateIndex + 1].rotation.z - states[stateIndex].rotation.z) * progress;  
+}
+
+document.querySelectorAll('.btn-scrolldown')[0].addEventListener('click', function() 
+{
+   
 })
+
+window.addEventListener('scroll', function(e) {
+    let scrollProcess = window.scrollY / window.innerHeight;
+
+    ModelChangeState(deer.model, deer.states, scrollProcess);
+})
+
+
+

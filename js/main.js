@@ -126,3 +126,10 @@ function SetLight()
     _scene.add( lights[1] );
     _scene.add( lights[2] );
 }
+
+document.querySelectorAll('.btn-scrolldown')[0].addEventListener('click', function() {
+    var qm = new THREE.Quaternion();
+    THREE.Quaternion.slerp(_camera.quaternion, destRotation, qm, 0.07);
+    _camera.quaternion = qm;
+    _camera.quaternion.normalize();
+})

@@ -12,27 +12,26 @@
             <div class="navbar">
                 <div class="container">
                     <a href="#" class="navbar-title">Three.js</a>
-                    <button class="btn-navbar">Screen 1</button>
-                    <button class="btn-navbar">Screen 1</button>
-                    <button class="btn-navbar">Screen 1</button>
-                    <button class="btn-navbar">Screen 1</button>
+                    <button class="btn-navbar" ancore="#screen-1">Screen 1</button>
+                    <button class="btn-navbar" ancore="#screen-2">Screen 2</button>
+                    <button class="btn-navbar" ancore="#screen-3">Screen 3</button>
                 </div>
             </div>
         </nav>
     </header>
-    <section class="screen">
+    <section class="screen" id="screen-1">
         <div class="container">
             <h1 class="title">Three.js - Test Page</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat labore fugiat accusantium eaque, quasi expedita. Tempora quod possimus sint animi perferendis veritatis, eius corporis nobis. Dignissimos repellat architecto pariatur minima!</p>
         </div>
     </section>
-    <section class="screen">
+    <section class="screen" id="screen-2">
         <div class="container">
             <h1 class="title">Screen 2</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat labore fugiat accusantium eaque, quasi expedita. Tempora quod possimus sint animi perferendis veritatis, eius corporis nobis. Dignissimos repellat architecto pariatur minima!</p>
         </div>
     </section>
-    <section class="screen">
+    <section class="screen" id="screen-3">
         <div class="container">
             <h1 class="title">Screen 3</h1>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat labore fugiat accusantium eaque, quasi expedita. Tempora quod possimus sint animi perferendis veritatis, eius corporis nobis. Dignissimos repellat architecto pariatur minima!</p>
@@ -42,7 +41,7 @@
     <button class="btn-scrolldown">
         <img src="images/scroll.png" alt="">
     </button>
-    
+    <script src="js/ancore.js"></script>
     <script src="js/Tween.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>

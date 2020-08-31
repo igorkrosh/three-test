@@ -92,7 +92,7 @@ button
     transition: 0.5s;
 }
 
-.btn-navbar:hover:after
+.btn-navbar:hover:after, .btn-navbar.active:after
 {
     width: 85%;
 }

@@ -216,7 +216,18 @@ window.addEventListener('scroll', function(e) {
     let scrollProcess = window.scrollY / window.innerHeight;
 
     ModelChangeState(deer.model, deer.states, scrollProcess);
+
+    SetNavbarBtnsActive(parseInt(scrollProcess + 0.3));
 })
 
+function SetNavbarBtnsActive(index)
+{
+    let activeBtn = document.querySelector('.btn-navbar.active');
+    
+    if (activeBtn != null)
+    {
+        document.querySelector('.btn-navbar.active').classList.remove('active')
+    }
 
-
+    document.querySelectorAll('.btn-navbar')[index].classList.add('active')
+}

@@ -6,7 +6,6 @@ let modelLoaderGLTF;
 
 let sceneWrapperId = 'background'
 let sceneWrapperNode;
-
 Init()
 Animate()
 
@@ -19,7 +18,7 @@ function Init()
     _camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     _camera.position.z = 10;
 
-    sceneWrapperNode = document.getElementById('background');
+    sceneWrapperNode = document.getElementById(sceneWrapperId);
 
     _renderer = new THREE.WebGLRenderer({alpha: true});
     _renderer.setSize(sceneWrapperNode.offsetWidth, sceneWrapperNode.offsetHeight);
@@ -27,6 +26,8 @@ function Init()
     LoadModels()
 
     sceneWrapperNode.appendChild(_renderer.domElement);
+
+    window.addEventListener( 'resize', OnWindowResize, false );
 }
 
 function Animate()
@@ -58,4 +59,12 @@ function LoadModels()
             model.rotation.y = -0.7;
         }
     )
+}
+
+function OnWindowResize()
+{
+    _camera.aspect = window.innerWidth / window.innerHeight;
+    _camera.updateProjectionMatrix();
+
+    _renderer.setSize( sceneWrapperNode.offsetWidth, sceneWrapperNode.offsetHeight );
 }

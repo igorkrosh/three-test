@@ -1,7 +1,12 @@
+@import "fonts/fonts.css";
+*
+{
+    box-sizing: border-box;
+}
 body
 {
     margin: 0;
-    
+    font-family: 'Futura PT';
 }
 
 #background
@@ -10,4 +15,5 @@ body
     position: fixed;
     width: 100%;
     height: 100%;
+    z-index: -1;
 }

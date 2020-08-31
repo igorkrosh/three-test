@@ -207,9 +207,18 @@ function ModelChangeState(model, states, progress)
     model.rotation.z = states[stateIndex].rotation.z + (states[stateIndex + 1].rotation.z - states[stateIndex].rotation.z) * progress;  
 }
 
-document.querySelectorAll('.btn-scrolldown')[0].addEventListener('click', function() 
+document.querySelector('.btn-scrolldown').addEventListener('click', function() 
 {
-   
+    let screenIndex = parseInt(window.scrollY / window.innerHeight);
+    let arrayScreens = document.querySelectorAll('.screen');
+
+    let scrollTop = arrayScreens[screenIndex + 1].offsetTop;
+    
+    window.scrollTo({
+        top: scrollTop,
+        left: 0,
+        behavior: 'smooth'
+    })
 })
 
 window.addEventListener('scroll', function(e) {
@@ -218,6 +227,20 @@ window.addEventListener('scroll', function(e) {
     ModelChangeState(deer.model, deer.states, scrollProcess);
 
     SetNavbarBtnsActive(parseInt(scrollProcess + 0.3));
+
+    let btnClickDown = document.querySelector('.btn-scrolldown');
+
+    if (parseInt(scrollProcess + 0.3) >= document.querySelectorAll('.screen').length - 1)
+    {
+        btnClickDown.classList.add('hidden')
+    }
+    else
+    {
+        if (btnClickDown.classList.contains('hidden'))
+        {
+            btnClickDown.classList.remove('hidden');
+        }
+    }
 })
 
 function SetNavbarBtnsActive(index)

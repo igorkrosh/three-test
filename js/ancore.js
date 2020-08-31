@@ -10,7 +10,6 @@ function Init()
     {
         elem.addEventListener('click', function () {
             let ancoreSelector = this.getAttribute('ancore')
-            console.log(ancoreSelector)
             let scrollTop = document.querySelector(ancoreSelector).offsetTop
             
             window.scrollTo({

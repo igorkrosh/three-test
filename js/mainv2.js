@@ -4,9 +4,6 @@ import { GLTFLoader } from './GLTFLoader.js';
 let _camera, _scene, _renderer;
 let modelLoaderGLTF;
 
-let sceneWrapperId = 'background'
-let sceneWrapperNode;
-
 Init()
 Animate()
 
@@ -19,14 +16,12 @@ function Init()
     _camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     _camera.position.z = 10;
 
-    sceneWrapperNode = document.getElementById('background');
-
     _renderer = new THREE.WebGLRenderer({alpha: true});
-    _renderer.setSize(sceneWrapperNode.offsetWidth, sceneWrapperNode.offsetHeight);
+    _renderer.setSize(window.innerWidth, window.innerHeight);
 
     LoadModels()
 
-    sceneWrapperNode.appendChild(_renderer.domElement);
+    document.body.appendChild(_renderer.domElement);
 }
 
 function Animate()

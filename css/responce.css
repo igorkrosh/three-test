@@ -1,0 +1,110 @@
+@media(max-width: 1200px)
+{
+    .container
+    {
+        width: 1024px;
+    }
+}
+
+@media(max-width: 1024px)
+{
+    .container
+    {
+        width: 992px;
+    }
+}
+
+
+@media(max-width: 992px)
+{
+    .screen .title
+    {
+        font-size: 80px;
+    }
+    .container
+    {
+        width: 768px;
+    }
+}
+
+@media(max-width: 768px)
+{
+    .screen .title
+    {
+        font-size: 60px;
+    }
+
+    .container
+    {
+        width: 578px;
+    }
+}
+
+@media(max-width: 578px)
+{
+    .container
+    {
+        width: 300px;
+    }
+    .navbar
+    {
+        padding: 10px 0;
+    }
+
+    .navbar-title
+    {
+        font-size: 22px;
+    }
+
+    .navbar .container
+    {
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .screen 
+    {
+        padding-top: 55px;
+    }
+
+    .show-menu
+    {
+        display: block;
+    }
+
+    .navbar-menu
+    {
+        position: fixed;
+        top: 0;
+        left: -1000px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: ivory;
+        width: 100%;
+        height: 100%;
+        transition: 0.5s;
+    }
+
+    .navbar-menu.active
+    {
+        left: 0;
+    }
+
+    .navbar-menu .btn-navbar
+    {
+        font-size: 24px;
+    }
+
+    .screen .title
+    {
+        font-size: 25px;
+    }
+
+    .screen p 
+    {
+        font-size: 18px;
+    }
+}

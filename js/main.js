@@ -213,6 +213,8 @@ document.querySelector('.btn-scrolldown').addEventListener('click', function()
     let arrayScreens = document.querySelectorAll('.screen');
 
     let scrollTop = arrayScreens[screenIndex + 1].offsetTop;
+
+
     
     window.scrollTo({
         top: scrollTop,
@@ -249,8 +251,24 @@ function SetNavbarBtnsActive(index)
     
     if (activeBtn != null)
     {
-        document.querySelector('.btn-navbar.active').classList.remove('active')
+        document.querySelector('.btn-navbar.active').classList.remove('active');
     }
 
-    document.querySelectorAll('.btn-navbar')[index].classList.add('active')
+    document.querySelectorAll('.btn-navbar')[index].classList.add('active');
 }
+
+document.querySelector('.show-menu').addEventListener('click', function () 
+{
+    if (this.classList.contains('active'))
+    {
+        this.classList.remove('active');
+        document.querySelector('.navbar-menu').classList.remove('active');
+        document.body.classList.remove('modal-open');
+    }
+    else
+    {
+        this.classList.add('active');
+        document.querySelector('.navbar-menu').classList.add('active');
+        document.body.classList.add('modal-open');
+    }
+})

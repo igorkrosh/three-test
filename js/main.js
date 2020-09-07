@@ -65,7 +65,8 @@ function Init()
 
     sceneWrapperNode = document.getElementById(sceneWrapperId);
 
-    _renderer = new THREE.WebGLRenderer({alpha: true});
+    _renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
+    _renderer.setPixelRatio( window.devicePixelRatio );
     _renderer.setSize(sceneWrapperNode.offsetWidth, sceneWrapperNode.offsetHeight);
 
     CreateParticle();
